@@ -56,17 +56,17 @@
 
     <script>
         // Get the elements that will be animated
-        var animateElements = document.querySelectorAll(".animate-element");
-
-        // Add an event listener for the scroll event
-        window.addEventListener("scroll", function () {
-            var currentPosition = window.scrollY + window.innerHeight;
+        const animateElements = document.querySelectorAll(".animate-element");
+        const animateScrollHandler=()=>{
+            const currentPosition = window.scrollY + window.innerHeight;
             for (const element of animateElements) {
                 if (currentPosition > element.getBoundingClientRect().top + window.scrollY) {
                     element.classList.add("animate");
                 }
             }
-        });
+        }
+        // Add an event listener for the scroll event
+        window.addEventListener("scroll", animateScrollHandler);
 
 
     </script>
