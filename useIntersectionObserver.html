@@ -53,7 +53,8 @@
       const animateElements = document.querySelectorAll(".animate-element");
 
       // create the observer
-      const observer = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver(entries => {
+        console.log(entries);
         entries.forEach((entry) => {
           entry.isIntersecting
             ? entry.target.classList.add("animate")
@@ -62,7 +63,7 @@
       });
 
       // observe each element
-      animateElements.forEach((element) => {
+      animateElements.forEach(element => {
         observer.observe(element);
       });
     </script>
