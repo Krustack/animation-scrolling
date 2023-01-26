@@ -1,77 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-.animate-element {
-  /* opacity: 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .animate-element {
+        /* opacity: 0;
   transform: translateY(50px); */
-  height: 100vh;
-}
-.animate-element.animate {
-  /* animation styles */
-  animation: myanimation 0.5s ease-in;
-}
+        height: 100vh;
+      }
 
-@keyframes myanimation{
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
+      .animate-element.animate {
+        /* animation styles */
+        animation: myanimation 0.5s ease-in;
+      }
 
-  </style>
-</head>
+      @keyframes myanimation {
+        from {
+          opacity: 0;
+        }
 
-<body>
-  <div class="animate-container">
-    <div class="animate-element">
-      <!-- content of the element -->
-      <h1>This is the first animated element</h1>
-      <p>It will animate when it is scrolled into view</p>
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="animate-container">
+      <div class="animate-element">
+        <!-- content of the element -->
+        <h1>This is the first animated element</h1>
+        <p>It will animate when it is scrolled into view</p>
+      </div>
+      <div class="animate-element">
+        <!-- content of the element -->
+        <h1>This is the second animated element</h1>
+        <p>It will animate when it is scrolled into view</p>
+      </div>
+      <div class="animate-element">
+        <!-- content of the element -->
+        <h1>This is the third animated element</h1>
+        <p>It will animate when it is scrolled into view</p>
+      </div>
     </div>
-    <div class="animate-element">
-      <!-- content of the element -->
-      <h1>This is the second animated element</h1>
-      <p>It will animate when it is scrolled into view</p>
-    </div>
-    <div class="animate-element">
-      <!-- content of the element -->
-      <h1>This is the third animated element</h1>
-      <p>It will animate when it is scrolled into view</p>
-    </div>
-  </div>
-  
 
+    <script>
+      // get the elements that will be animated
+      const animateElements = document.querySelectorAll(".animate-element");
 
+      // create the observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.isIntersecting
+            ? entry.target.classList.add("animate")
+            : entry.target.classList.remove("animate");
+        });
+      });
 
-
-
-
-
-
-
-  <script>
-// get the elements that will be animated
-const animateElements = document.querySelectorAll(".animate-element");
-
-// create the observer
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    entry.isIntersecting ? entry.target.classList.add("animate") : entry.target.classList.remove("animate");
-  });
-});
-
-
-
-// observe each element
-animateElements.forEach( element => {
-  observer.observe(element);
-});
-
-  </script>
-</body>
-
+      // observe each element
+      animateElements.forEach((element) => {
+        observer.observe(element);
+      });
+    </script>
+  </body>
 </html>
