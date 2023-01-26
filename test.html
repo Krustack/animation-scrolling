@@ -7,24 +7,7 @@
     <title>Document</title>
     <style>
       .animate-element {
-        /* opacity: 0;
-  transform: translateY(50px); */
         height: 100vh;
-      }
-
-      .animate-element.animate {
-        /* animation styles */
-        animation: myanimation 0.5s ease-in;
-      }
-
-      @keyframes myanimation {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
       }
     </style>
   </head>
@@ -49,22 +32,37 @@
     </div>
 
     <script>
-      // get the elements that will be animated
-      const animateElements = document.querySelectorAll(".animate-element");
+      // Get the elements that will be animated
+      var animateElements = document.querySelectorAll(".animate-element");
+      function buildThresholdList() {
+        let thresholds = [];
+        let numSteps = 20;
 
-      // create the observer
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          entry.isIntersecting
-            ? entry.target.classList.add("animate")
-            : entry.target.classList.remove("animate");
-        });
+        for (let i = 1.0; i <= numSteps; i++) {
+          let ratio = i / numSteps;
+          thresholds.push(ratio);
+        }
+
+        thresholds.push(0);
+        return thresholds;
+      }
+
+      // Create an observer with a threshold of 0.5
+      var observer = new IntersectionObserver(handleIntersect, {
+        threshold: buildThresholdList(),
       });
 
-      // observe each element
-      animateElements.forEach(element => {
+      // Add the elements to the observer
+      animateElements.forEach(function (element) {
         observer.observe(element);
       });
+
+      function handleIntersect(entries, observer) {
+        entries.forEach(function (entry) {
+          var ratio = entry.intersectionRatio;
+            entry.target.style.opacity = ratio;
+        });
+      }
     </script>
   </body>
 </html>
