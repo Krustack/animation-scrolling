@@ -7,13 +7,11 @@
     <title>Document</title>
     <style>
       .animate-element {
-        /* initial styles */
         opacity: 0;
         height: 100vh;
       }
 
       .animate-element.animate {
-        /* animation styles */
         animation: myanimation 1s ease-in;
         opacity: 1;
       }
@@ -53,20 +51,17 @@
     </div>
 
     <script>
-      // Get the elements that will be animated
       const animateElements = document.querySelectorAll(".animate-element");
+
       const animateScrollHandler = () => {
         const currentPosition = window.scrollY + window.innerHeight;
         for (const element of animateElements) {
-          // if (currentPosition > element.getBoundingClientRect().top + window.scrollY) {
-          //     element.classList.add("animate");
-          // }
           currentPosition > element.getBoundingClientRect().top + window.scrollY
             ? element.classList.add("animate")
             : element.classList.remove("animate");
         }
       };
-      // Add an event listener for the scroll event
+
       window.addEventListener("scroll", animateScrollHandler);
     </script>
   </body>
