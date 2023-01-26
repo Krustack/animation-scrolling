@@ -54,24 +54,20 @@
 
 
   <script>
+// get the elements that will be animated
+const animateElements = document.querySelectorAll(".animate-element");
+
 // create the observer
-var observer = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      // add a class to the element to start the animation
-      entry.target.classList.add("animate");
-    } else {
-      // remove the class to stop the animation
-      entry.target.classList.remove("animate");
-    }
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    entry.isIntersecting ? entry.target.classList.add("animate") : entry.target.classList.remove("animate");
   });
 });
 
-// get the elements that will be animated
-var animateElements = document.querySelectorAll(".animate-element");
+
 
 // observe each element
-animateElements.forEach(function(element) {
+animateElements.forEach( element => {
   observer.observe(element);
 });
 
